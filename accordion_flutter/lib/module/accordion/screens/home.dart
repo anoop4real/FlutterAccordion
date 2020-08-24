@@ -1,5 +1,6 @@
 import 'package:accordionflutter/module/accordion/datastore/dataStore.dart';
 import 'package:accordionflutter/module/accordion/model/ampGenericObject.dart';
+import 'package:accordionflutter/module/accordion/screens/detailed.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -33,11 +34,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildListTileWith(AMPGenericObject object) {
     return ListTile(
-      title: Padding(
+      title: AnimatedPadding(
+        duration: Duration(
+          milliseconds: 100
+        ),
         padding: EdgeInsets.only(left: (10.0 * object.level)),
         child: Text(object.name),
       ),
-      subtitle: Padding(
+      subtitle: AnimatedPadding(
+        duration: Duration(
+            milliseconds: 100
+        ),
         padding: EdgeInsets.only(left: (10.0 * object.level)),
         child: Text(object.parentName),
       ),
@@ -49,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void refresh(AMPGenericObject object) {
     if (!object.canBeExpanded) {
       // Take to details
+      navigateToDetailsWith(object);
       return;
     }
     if (object.isExpanded) {
@@ -60,6 +68,12 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  void navigateToDetailsWith(AMPGenericObject object) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => DetailedScreen(object: object)),
+    );
+  }
   IconData _trailingIconFor(AMPGenericObject object) {
     if (object.isExpanded) {
       return Icons.keyboard_arrow_down;
