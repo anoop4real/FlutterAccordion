@@ -27,9 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
     return ListView.builder(
-        itemCount: dataStore.dataRows.length,
+        itemCount: dataStore.numberOfItems(),
         itemBuilder: (context, index) =>
-            _buildListTileWith(dataStore.dataRows[index]));
+            _buildListTileWith(dataStore.itemAt(index)));
   }
 
   Widget _buildListTileWith(AMPGenericObject object) {

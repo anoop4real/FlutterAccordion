@@ -114,4 +114,12 @@ class DataStore {
       }
     }
   }
+
+  int numberOfItems() {
+    return this.dataRows.length;
+  }
+
+  AMPGenericObject itemAt(int index) {
+    return this.dataRows[index];
+  }
 }
